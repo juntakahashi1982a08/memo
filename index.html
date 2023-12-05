@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Meisi</title>
+<script src="js/jquery-2.1.3.min.js"></script>
+<link rel="stylesheet" href="css/sample.css">
+</head>
+<body>
+<header>
+<h1>名刺情報簡易?登録アプリ</h1>
+</header>
+<main>
+    <!-- <input type="text" id="key"> -->
+    <ul>
+        <li>名前</li>
+        <li>企業</li>
+        <li>肩書き</li>
+        <li>年齢</li>
+        <li>眼鏡</li>
+        <li>髪型</li>
+        <li>面談年月日</li>
+<!-- ここだけliのcssを解除 -->
+    </ul>
+    <ul>
+    <li><textarea id="name"></textarea></li>
+    <li><textarea id="company"></textarea></li>
+    <li><textarea id="profile"></textarea></li>
+    <li><textarea id="age"></textarea></li>
+    <li><textarea id="glass"></textarea></li>
+    <li><textarea id="hair"></textarea></li>
+    <li><textarea id="date"></textarea></li>
+    </ul><br>
+    <ul>
+        <li id="save">登録</li>
+        <li id="remove">削除</li>
+        <!-- 1件remove -->
+        <li id="arrange">並び替え</li>
+        <!-- 順番入れ替え -->
+        <li id="clear">Clear=不要</li>
+    </ul>
+</main>
+<table id="list">
+<tr><th>名前</th><td>企業</td><td>肩書き</td><td>年齢</td><td>眼鏡</td><td>髪型</td><td>面談年月日</td></tr>
+<!-- 表示されない。最初はされていた →解決-->
+<!-- 名前、企業で「ソート」できたい -->
+    <!-- ここに追加データが挿入される -->
+</table>
+<script>
+
+//1.Save クリックイベント
+
+$("#save").on("click",function(){
+    // var datalist = {
+    const name = $("#name").val();
+    const company = $("#company").val();
+    const profile = $("#profile").val();
+    const age = $("#age").val();
+    const glass = $("#glass").val();
+    const hair = $("#hair").val();
+    const date = $("#date").val();
+    // 手書き描画エリア
+    // }
+    localStorage.setItem(name, company, profile, age, glass, hair, date);
+    // dateは自動で取得したい
+    // localStorage.setItem("datalist", JSON.stringify(datalist));
+    const html = "<tr><th>" + name + "</th><td>" + company + "</td><td>" + profile + "</td><td>" + age + "</td><td>" + glass + "</td><td>" + hair + "</td><td>" + date + "</td></tr>";
+    $("#list").append(html);
+});
+
+//2.clear クリックイベント
+
+$("#clear").on("click",function(){
+    localStorage.clear();
+    $("#list").empty();
+});
+
+//3.ページ読み込み：保存データ取得表示
+
+for(let i = 0; i < localStorage.length; i++){
+    const key = localStorage.key(i);
+    const value = localStorage.getItem(key);
+    const html = "<tr><th>" + name + "</th><td>" + company + "</td><td>" + profile + "</td><td>" + age + "</td><td>" + glass + "</td><td>" + hair + "</td><td>" + date + "</td></tr>";
+    $("#list").append(html);
+};
+
+// object.keys .forEach
+
+// htmlの更新マーク押すと保存データリスト表示の行が変に入れ替わる?
+
+// 1データ削除
+
+$("#remove").on("click",function(){
+    const key = $("#key").val();
+    const value = $("#memo").val();
+    // localStorage.setItem(key,value);
+    const html = "<tr><th>" + key + "</th><td>" + value + "</td></tr>";
+    localStorage.removeItem(key,value);
+    $("#list").remove(html);
+});
+
+// localStorageはremoveできたけどhtml(list)がremoveできてない
+// 且つ直近書き込みの1回しか消せない
+// val(), localStorage, memo, google
+
+</script>
+<footer><small>G's</small></footer>
+</body>
+</html>

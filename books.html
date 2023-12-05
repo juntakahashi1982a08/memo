@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>books</title>
+<script src="js/jquery-2.1.3.min.js"></script>
+<link rel="stylesheet" href="css/sample.css">
+</head>
+<body>
+<header>
+<h1>books</h1>
+</header>
+<main>
+    <input type="text" id="key">
+    <textarea id="memo"></textarea>
+    <ul>
+        <li id="save">Save</li>
+        <li id="remove">Remove</li>
+        <li id="clear">Clear</li>
+    </ul>
+</main>
+<table id="content">
+
+</table>
+<script>
+
+var key = $("#key").val();
+$("#content").html(key);
+
+// $.getJSON(
+//     "https://www.googleapis.com/books/v1/volumes?q=jquery",
+//     function(data){
+//         console.dir(data);
+//         var view = "";
+//         for (var i = 0; i < data.items.length; i++){
+//             var item = data.items[i];
+//             view +='<ul>';
+//             view +='<li>題名：' + item.volumeInfo.title + '</li>';
+//             view +='<li>著者：' + item.volumeInfo.author + '</li>';
+//             view +='</ul>';
+//         }
+//         $("#content").html(view);
+//     };
+// );
+
+</script>
+<footer><small>G's</small></footer>
+</body>
+</html>
